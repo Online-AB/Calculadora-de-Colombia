@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <!-- Mobile Responsiveness -->
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <!-- Referrer Policy -->
+    <meta name="referrer" content="always" />
+    <!-- SEO Meta Description -->
+    <meta name="description" content="Calculadora de inflación Argentina - Una herramienta simple para conocer el impacto de la inflación en tu dinero. Ingresa valores y obtén resultados precisos al instante." />
+    <!-- Meta Keywords -->
+    <meta name="keywords" content="calculadora de inflación, inflación Argentina, economía, poder adquisitivo, finanzas personales, cálculo de inflación" />
+    <title>Calculadora de Inflación Argentina.</title>
+    <!-- Canonical Tag (empty) -->
+    <link href="" rel="canonical" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            background: #f0f8ff;
+            color: #2a3d45;
+            padding: 3rem 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background: #ffffff;
+            border-radius: 24px;
+            box-shadow: 0 18px 40px rgba(38, 70, 83, 0.12);
+            padding: 4rem 4.5rem;
+            max-width: 700px;
+            width: 100%;
+            position: relative;
+            border: 3px solid #9be7ff;
+        }
+        h1 {
+            color: #1b3a4b;
+            text-align: center;
+            margin-bottom: 3rem;
+            font-weight: 800;
+            font-size: 3rem;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+        }
+        select, input[type="number"] {
+            width: 100%;
+            padding: 1rem 1.4rem;
+            margin-bottom: 2.2rem;
+            border-radius: 14px;
+            border: 2.5px solid #82cfff;
+            font-size: 1.25rem;
+            color: #10536d;
+            font-weight: 700;
+            background: #e9f9ff;
+            box-shadow: inset 3px 3px 10px #b0ecff, inset -3px -3px 10px #d1f2ff;
+            transition: border-color 0.4s ease, box-shadow 0.4s ease;
+        }
+        select:focus, input[type="number"]:focus {
+            border-color: #2185d0;
+            box-shadow: 0 0 16px #2196f3cc;
+            outline: none;
+            background: #cff0ff;
+            color: #004d6c;
+        }
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+            color: #107799;
+            font-size: 1.1rem;
+            letter-spacing: 0.6px;
+        }
+        button {
+            margin-top: 1rem;
+            width: 100%;
+            padding: 1.6rem 0;
+            background: linear-gradient(90deg, #22c1c3, #fdbb2d);
+            border: none;
+            color: #ffffff;
+            font-size: 1.4rem;
+            font-weight: 800;
+            border-radius: 26px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 14px 38px rgba(252, 187, 45, 0.8);
+            transition: background 0.5s ease, box-shadow 0.5s ease;
+        }
+        button:hover {
+            background: linear-gradient(90deg, #fdbb2d, #22c1c3);
+            box-shadow: 0 16px 48px rgba(34, 193, 195, 0.9);
+        }
+        .result {
+            margin-top: 2.5rem;
+            padding: 1.8rem 1.2rem;
+            background: #d2fbff;
+            border-radius: 20px;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #0d4a55;
+            box-shadow: inset 0 0 18px #6fd7ff80;
+            letter-spacing: 0.7px;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        article {
+            margin-top: 4rem;
+            line-height: 1.85;
+            font-size: 1.18rem;
+            color: #175f71;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-align: justify;
+        }
+        a.cta-button {
+            display: block;
+            text-align: center;
+            margin-top: 3.5rem;
+            padding: 1.8rem 0;
+            font-weight: 800;
+            color: #004d6c;
+            background: #a3ddfd;
+            text-decoration: none;
+            border-radius: 30px;
+            box-shadow: 0 14px 44px rgba(34, 193, 195, 0.65);
+            transition: background 0.35s ease, box-shadow 0.35s ease, color 0.35s ease;
+            text-transform: uppercase;
+            letter-spacing: 2.2px;
+        }
+        a.cta-button:hover {
+            background: #22c1c3;
+            color: #ffffff;
+            box-shadow: 0 18px 52px rgba(34, 193, 195, 0.95);
+        }
+        /* Author Profile */
+        .author-profile {
+            display: flex;
+            align-items: center;
+            margin-top: 4.5rem;
+            padding-top: 2.5rem;
+            border-top: 1.5px solid #a3ddfd;
+        }
+        .author-photo {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 3px 12px rgba(34, 193, 195, 0.4);
+            flex-shrink: 0;
+            background: url('https://i.pravatar.cc/80?u=juan-perez-fresh') center center/cover no-repeat;
+            margin-right: 1.8rem;
+        }
+        .author-info {
+            font-size: 1.05rem;
+            color: #1a4957;
+        }
+        .author-info strong {
+            display: block;
+            font-weight: 800;
+            font-size: 1.2rem;
+            margin-bottom: 0.25rem;
+        }
+        .author-info span {
+            color: #56c0e8;
+            font-style: italic;
+        }
+        @media (max-width: 480px) {
+            .container {
+                padding: 2.5rem 2rem;
+            }
+            h1 {
+                font-size: 2.25rem;
+            }
+            select, input[type="number"] {
+                font-size: 1.1rem;
+                padding: 0.9rem 1.1rem;
+            }
+            button {
+                font-size: 1.25rem;
+                padding: 1.3rem 0;
+            }
+            .author-photo {
+                width: 65px;
+                height: 65px;
+                margin-right: 1.2rem;
+            }
+            .author-info strong {
+                font-size: 1.1rem;
+            }
+            .author-info {
+                font-size: 1rem;
+            }
+            a.cta-button {
+                font-size: 1.2rem;
+                padding: 1.4rem 0;
+                letter-spacing: 1.8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Calculadora de Inflación Colombia</h1>
+        <select id="citySelector" aria-label="Seleccionar ciudad para calculadora">
+            <option value="https://calculadorade-inflacion.com/index.html" selected>Calculadora de Inflación Argentina</option>
+            <option value="https://calculadorade-inflacion.com/calculadora-ipc-chile.html">Calculadora de la inflación de Chile.</option>
+            <option value="https://calculadorade-inflacion.com/colombia.html">Calculadora de Inflación Colombia.</option>
+            <option value="https://calculadorade-inflacion.com/mexico.html">Calculadora de Inflación México.</option>
+            <option value="https://calculadorade-inflacion.com/paraguay.html">Calculadora de la inflación Paraguay.</option>
+            <option value="https://calculadorade-inflacion.com/peru.html">Calculadora de inflación de Perú.</option>
+            <option value="https://calculadorade-inflacion.com/uruguay.html">Calculadora de inflación Uruguay.</option>
+            <option value="https://calculadorade-inflacion.com/united-state.html">US Inflation Calculator.</option>
+        </select>
+        <label for="amount">Cantidad inicial (en moneda local):</label>
+        <input type="number" id="amount" min="0" step="0.01" placeholder="Ejemplo: 1000" />
+        <label for="startYear">Año inicial:</label>
+        <input type="number" id="startYear" min="1900" max="2100" placeholder="Ejemplo: 2020" />
+        <label for="endYear">Año final:</label>
+        <input type="number" id="endYear" min="1900" max="2100" placeholder="Ejemplo: 2024" />
+        <button onclick="calculateInflation()">Calcular Inflación</button>
+       
+        <a href="https://calculadorade-inflacion.com/colombia.html" class="cta-button">Calculadora de Inflación Colombia</a>
+        <article>
+            <p>
+                La inflación es un factor económico que afecta el poder adquisitivo del dinero. Esta calculadora permite estimar cómo la inflación puede impactar tus finanzas personales a lo largo de los años. Ingresa la cantidad inicial y los años para obtener una estimación del valor ajustado por inflación.
+            </p>
+        </article>
+        <div class="author-profile" aria-label="Información del autor">
+            <div class="author-photo" role="img" aria-label="Foto del autor"></div>
+            <div class="author-info">
+                <strong>Juan Pérez</strong>
+                <span>Economista y asesor financiero</span>
+            </div>
+        </div>
+    </div>
+    <script>
+        const selector = document.getElementById('citySelector');
+        selector.addEventListener('change', function() {
+            if(this.value) window.location.href = this.value;
+        });
+        function calculateInflation() {
+            const amount = parseFloat(document.getElementById('amount').value);
+            const startYear = parseInt(document.getElementById('startYear').value);
+            const endYear = parseInt(document.getElementById('endYear').value);
+            const resultDiv = document.getElementById('result');
+            if(!amount || !startYear || !endYear) {
+                resultDiv.textContent = 'Por favor, completa todos los campos.';
+                resultDiv.style.color = '#e55934';
+                return;
+            }
+            if(endYear <= startYear) {
+                resultDiv.textContent = 'El año final debe ser mayor que el año inicial.';
+                resultDiv.style.color = '#e55934';
+                return;
+            }
+            const years = endYear - startYear;
+            const inflationRate = 0.03; // 3% anual
+            const adjustedAmount = amount * Math.pow(1 + inflationRate, years);
+            resultDiv.style.color = '#10536d';
+            resultDiv.textContent = `Cantidad ajustada por inflación para ${years} años: ${adjustedAmount.toFixed(2)}`;
+        }
+    </script>
+</body>
+</html>
